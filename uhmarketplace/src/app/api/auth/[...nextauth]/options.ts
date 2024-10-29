@@ -3,14 +3,14 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "../../../../../prisma/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { compare } from "bcrypt";
+import { Adapter } from "next-auth/adapters";
 // I ended up opting for a normal credential log in using JWT for the session
-// 
 
 export const options: NextAuthOptions = {
     session: {
         strategy: 'jwt'
     },
-    adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma) as unknown as Adapter,
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -25,11 +25,16 @@ export const options: NextAuthOptions = {
                 }
             },
             async authorize(credentials) {
+                if(!credentials?.email || !credentials?.password) {
+                    return null;
+                }
+
                 const user = await prisma.user.findUnique({
                     where: {
                         email: credentials?.email as string,
                     }
                 })
+                
                 // Compare the password to the hashed version in the database using bcrypt compare
                 const compareHash = await compare(credentials.password, user.hashedPassword)
 
@@ -52,5 +57,10 @@ export const options: NextAuthOptions = {
                 return false;
             }
         }
+    },
+    // Here is where we would customize the signIn/signOut page so we are not forced to use
+    // NextAuths pages
+    pages: {
+        // https://next-auth.js.org/configuration/pages
     }
 }
