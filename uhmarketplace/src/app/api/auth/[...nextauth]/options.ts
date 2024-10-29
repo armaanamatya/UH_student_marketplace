@@ -1,19 +1,17 @@
 import type { NextAuthOptions } from "next-auth";
-import AzureAD from "next-auth/providers/azure-ad";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "../../../../../prisma/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter"
-// I removed support by other means of logging in other than through microsoft authentication. The purpose for this is to truly restrict 
-// access to the website to only uh.edu emails. Authentication will be done through nextauth and azure active directory. 
+import { compare } from "bcrypt";
+// I ended up opting for a normal credential log in using JWT for the session
+// 
 
 export const options: NextAuthOptions = {
+    session: {
+        strategy: 'jwt'
+    },
     adapter: PrismaAdapter(prisma),
     providers: [
-        AzureAD({
-            clientId: process.env.AZURE_AD_CLIENT_ID as string,
-            clientSecret: process.env.AZURE_AD_CLIENT_SECRET as string,
-            tenantId: process.env.AZURE_AD_TENANT_ID as string,
-        }),
         CredentialsProvider({
             name: "Credentials",
             credentials: {
@@ -30,16 +28,24 @@ export const options: NextAuthOptions = {
                 const user = await prisma.user.findUnique({
                     where: {
                         email: credentials?.email as string,
-                        hashedPassword: credentials?.password as string,
                     }
                 })
-                console.log(user);
-                return user;
+                // Compare the password to the hashed version in the database using bcrypt compare
+                const compareHash = await compare(credentials.password, user.hashedPassword)
+
+                if(!compareHash) {
+                    return null;
+                } else {
+                    console.log(user);
+                    return user;
+                }
             }
         })
     ],
     callbacks: {
         async signIn({ user }) {
+            // If the email does not end with @cougarnet.uh.edu, it will not allow
+            // the user to sign in. This will be the same for when a user registers.
             if(user.email?.endsWith("@cougarnet.uh.edu")){
                 return true
             } else {
