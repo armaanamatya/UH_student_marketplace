@@ -4,6 +4,8 @@ import { prisma } from "../../../../../prisma/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { compare } from "bcrypt";
 import { Adapter } from "next-auth/adapters";
+import { ZodError } from "zod";
+import { signInSchema } from "@/lib/zod";
 // I ended up opting for a normal credential log in using JWT for the session
 
 export const options: NextAuthOptions = {
@@ -25,25 +27,35 @@ export const options: NextAuthOptions = {
                 }
             },
             async authorize(credentials) {
-                if(!credentials?.email || !credentials?.password) {
-                    return null;
-                }
-
-                const user = await prisma.user.findUnique({
-                    where: {
-                        email: credentials?.email as string,
+                try{
+                    if(!credentials?.email || !credentials?.password) {
+                        return null;
                     }
-                })
-                
-                // Compare the password to the hashed version in the database using bcrypt compare
-                const compareHash = await compare(credentials.password, user.hashedPassword)
 
-                if(!compareHash) {
-                    return null;
-                } else {
-                    console.log(user);
-                    return user;
+                    const { email , password } = await signInSchema.parseAsync(credentials)
+
+
+                    const user = await prisma.user.findUnique({
+                        where: {
+                            email: email as string,
+                        }
+                    })
+                    
+                    // Compare the password to the hashed version in the database using bcrypt compare
+                    const compareHash = await compare(password, user.hashedPassword)
+    
+                    if(!compareHash) {
+                        return null;
+                    } else {
+                        return user;
+                    }
+
+                } catch (error) {
+                    if(error instanceof ZodError) {
+                        return null;
+                    }
                 }
+                
             }
         })
     ],
