@@ -22,7 +22,7 @@ export async function POST(req: Request) {
         // This could be abused if the user decides to create an account even if the email did not exist. I will add an email verification system to filter that out. - Alex
         const hashPass = await hash(password, 10);
 
-        if(email?.endsWith("@cougarnet.uh.edu")) {
+        if(email?.endsWith("@uh.edu")) {
             const newUser = await prisma.user.create({
                 data: {
                     email: email,
