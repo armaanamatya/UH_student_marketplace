@@ -63,7 +63,7 @@ export const options: NextAuthOptions = {
         async signIn({ user }) {
             // If the email does not end with @cougarnet.uh.edu, it will not allow
             // the user to sign in. This will be the same for when a user registers.
-            if(user.email?.endsWith("@uh.edu")){
+            if(user.email?.endsWith("@uh.edu") || (user.email?.endsWith("@cougarnet.uh.edu"))){
                 return true
             } else {
                 return false;
