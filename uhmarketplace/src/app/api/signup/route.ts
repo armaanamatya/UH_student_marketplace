@@ -14,14 +14,15 @@ export async function POST(req: Request) {
         const { email, password, name } = body;
 
         const existingUser = await prisma.user.findUnique({
-            where: {email: email }
+            // making email lowercase to avoid case-sensitivity errors
+            // specifically for resend email verification
+            where: {email: email.toLowerCase() }
         })
 
         if(existingUser) {
             return NextResponse.json({ user: null, message: "User with this email already exists"}, {status: 409})
         }
 
-        // This could be abused if the user decides to create an account even if the email did not exist. I will add an email verification system to filter that out. - Alex
         const hashPass = await hash(password, 10);
 
       
@@ -29,7 +30,7 @@ export async function POST(req: Request) {
             await prisma.user.create({
               
                 data: {
-                    email: email,
+                    email: email.toLowerCase(),
                     hashedPassword: hashPass,
                     name: name
                 }
