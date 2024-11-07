@@ -6,6 +6,7 @@ import { compare } from "bcrypt";
 import { Adapter } from "next-auth/adapters";
 import { ZodError } from "zod";
 import { signInSchema } from "@/lib/zod";
+import { getUserById } from "@/data/user";
 // I ended up opting for a normal credential log in using JWT for the session
 
 export const options: NextAuthOptions = {
@@ -68,14 +69,22 @@ export const options: NextAuthOptions = {
     ],
     callbacks: {
         async signIn({ user }) {
-            // If the email does not end with @cougarnet.uh.edu, it will not allow
+            // If the email does not end with @uh.edu, it will not allow
             // the user to sign in. This will be the same for when a user registers.
-            // THIS IS A TEMPORARY CHANGE
-            if(user.email?.endsWith("@uh.edu") || user.email?.endsWith("@cougarnet.uh.edu")){
-                return true
+            if(user.email?.endsWith("@uh.edu")){
+            //@ts-expect-error: temporary fix
+                const existingUser = await getUserById(user.id as number);
+
+                //if the emailVerified value does not exist, return false
+                if(!existingUser?.emailVerified){
+                    return false;
+                }
+
+                return true;
             } else {
                 return false;
             }
+
         }
     },
     // Here is where we would customize the signIn/signOut page so we are not forced to use
