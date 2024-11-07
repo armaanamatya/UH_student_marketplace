@@ -2,6 +2,7 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // This needs to use the future domain we plan to use
+//
 const domain = "http://localhost:3000";
 
 // This is the portion that will be sending the email to the user for verification

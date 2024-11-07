@@ -9,6 +9,7 @@ const VerifyEmailForm = () => {
     const [success, setSuccess] = useState<string | undefined>(undefined);
 
     const searchParams = useSearchParams();
+    // grab the token value from the search params. 
     const token = searchParams.get("token");
 
     const onSubmit = useCallback(() => {
@@ -21,8 +22,13 @@ const VerifyEmailForm = () => {
             return;
         }
 
+        
+        // the token is sent to the server to be validated and
+        // this will wait for the response to come back.
+        // Check verify-email-form for details of the errors.
         newVerification(token).then((data) => {
             if(data.success) {
+                console.log(data.success);
                 setSuccess(data.success);
             } 
             if(data.error) {
@@ -39,12 +45,15 @@ const VerifyEmailForm = () => {
         onSubmit()
     }, [])
     
+    console.log(success);
 
     return(
         // This is not final and requires frontend to make it look pretty (:
+        // Also reroute logic would need to be added so it sends the user back to the login page to finish 
         <div>
             {!success && !error && <p>Loading</p>}
             {!success && error}
+            {success}
         </div>
     )
 }
