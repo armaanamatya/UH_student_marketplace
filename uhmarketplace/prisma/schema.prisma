@@ -18,10 +18,19 @@ model User {
   email String @unique
   name String
   hashedPassword String
+  emailVerified DateTime?
   posts Post[]
   role Role @default(USER)
-
   @@unique([email, name])
+}
+
+model VerificationToken {
+  id Int @id@default(autoincrement())
+  email String
+  token String
+  expires DateTime
+
+  @@unique([email, token])
 }
 
 model Post {
