@@ -1,5 +1,5 @@
 import { object, string } from "zod"
- 
+ // zod used for input validation
 export const signInSchema = object({
   email: string({ required_error: "Email is required" })
     .min(1, "Email is required")
