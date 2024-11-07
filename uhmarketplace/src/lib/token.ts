@@ -12,6 +12,7 @@ export const generateVerificationToken = async (email: string) => {
     // Check if the token already exists 
     const existingToken = await getVerificationTokenByEmail(email)
 
+    //If a token exists, delete it
     if(existingToken) {
         await prisma.verificationToken.delete({
             where: {

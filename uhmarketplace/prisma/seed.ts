@@ -3,10 +3,10 @@ const prisma = new PrismaClient();
 
 async function main() {
     const alex = await prisma.user.upsert({
-        where: { email: 'alex@cougarnet.uh.edu'},
+        where: { email: 'alex@uh.edu'},
         update: {},
         create: {
-            email: 'alex@cougarnet.uh.edu',
+            email: 'alex@uh.edu',
             name: 'alex',
             hashedPassword: 'password'
         }

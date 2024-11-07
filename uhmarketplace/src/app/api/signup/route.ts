@@ -2,6 +2,7 @@ import { PrismaClient, Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server';
 import { hash } from 'bcrypt';
 import { generateVerificationToken } from '@/lib/token';
+import { sendVerificationEmail } from '@/lib/mail';
 // POST request for the registration of a user. 
 
 const prisma = new PrismaClient();
@@ -24,7 +25,7 @@ export async function POST(req: Request) {
         const hashPass = await hash(password, 10);
 
         if(email?.endsWith("@uh.edu")) {
-            const newUser = await prisma.user.create({
+            await prisma.user.create({
                 data: {
                     email: email,
                     hashedPassword: hashPass,
@@ -37,6 +38,8 @@ export async function POST(req: Request) {
 
         // Generate a verification token
         const verificationToken = await generateVerificationToken(email);
+
+        await sendVerificationEmail(email, verificationToken.token)
         
         return NextResponse.json(body);
     } catch (error) {
