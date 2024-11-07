@@ -18,5 +18,15 @@ model User {
   email String @unique
   name String
   hashedPassword String
+  emailVerified DateTime?
+}
+
+model VerificationToken {
+  id Int @id@default(autoincrement())
+  email String
+  token String
+  expires DateTime
+
+  @@unique([email, token])
 }
 

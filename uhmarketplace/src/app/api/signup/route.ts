@@ -1,6 +1,7 @@
 import { PrismaClient, Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server';
 import { hash } from 'bcrypt';
+import { generateVerificationToken } from '@/lib/token';
 // POST request for the registration of a user. 
 
 const prisma = new PrismaClient();
@@ -33,6 +34,9 @@ export async function POST(req: Request) {
         } else {
             return NextResponse.json({message: "This email is not a valid UH email"}, {status: 400})
         }
+
+        // Generate a verification token
+        const verificationToken = await generateVerificationToken(email);
         
         return NextResponse.json(body);
     } catch (error) {

@@ -26,6 +26,7 @@ export const options: NextAuthOptions = {
                     type: "text"
                 }
             },
+            // @ts-ignore
             async authorize(credentials) {
                 try{
                     if(!credentials?.email || !credentials?.password) {
@@ -42,7 +43,7 @@ export const options: NextAuthOptions = {
                     })
                     
                     // Compare the password to the hashed version in the database using bcrypt compare
-                    const compareHash = await compare(password, user.hashedPassword)
+                    const compareHash = await compare(password, user?.hashedPassword as string)
     
                     if(!compareHash) {
                         return null;
