@@ -1,36 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Starting the program for development
+1. Make sure to run "npm install" in this folder /UHMARKETPLACE/uhmarketplace. Check your terminal to ensure you are in the correct path. When you input "ls" in the terminal, you should see all the files related to the program like "prisma", "src", .etc.
 
-## Getting Started
+2. Once you have installed everything, you need to set up your mySQL database locally otherwise this application will not work for certain features.
+If you already don't have mySQL installed, please watch this video from fireship on how to set it up. 
+https://www.youtube.com/watch?v=Cz3WcZLRaWc&t=300s
+I recommend watching section 7-9 in order to create your own local database. 
 
-First, run the development server:
+3. Once you set up the DB, check out .env.example because now we will connect the DB to this application. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+4. Run "npx prisma db push" to push the settings into prisma. Once finished, we need to seed the DB with data to experiment with. Run "npx prisma db seed" and now your DB should have data. Check the DB by using the extension from the fireship video and click your connection then the database you created. There should be tables that you can click on and if you click the magnifying glass, you should see the data that was seeded in. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Double check to see if you have the ENV files set up correctly. Errors will occur if you do not. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. You should be able to do "npm run dev" in the terminal and start checking out the application. The majority of the front-end is in (cb) but it is up to the team to decide how they want to structure the project. 
