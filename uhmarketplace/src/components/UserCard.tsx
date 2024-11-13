@@ -9,7 +9,6 @@ type Props = {
 }
 
 export default function Card({user}: Props) {
-    console.log()
     const greeting = user?.name ? (
         <div>
             <h2>Hello {user?.name}</h2>

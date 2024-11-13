@@ -26,11 +26,13 @@ export const options: NextAuthOptions = {
                     type: "text"
                 }
             },
+            //@ts-expect-error: nextAuth TS error
             async authorize(credentials) {
                 try{
                     if(!credentials?.email || !credentials?.password) {
                         return null;
                     }
+
 
                     const { email , password } = await signInSchema.parseAsync(credentials)
 
@@ -40,8 +42,13 @@ export const options: NextAuthOptions = {
                             email: email as string,
                         }
                     })
+
+                    if(!user){
+                        return null;
+                    }
                     
                     // Compare the password to the hashed version in the database using bcrypt compare
+                    
                     const compareHash = await compare(password, user.hashedPassword)
     
                     if(!compareHash) {

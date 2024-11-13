@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 import { NextResponse } from 'next/server';
 import { hash } from 'bcrypt';
 // POST request for the registration of a user. 
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         const hashPass = await hash(password, 10);
 
         if(email?.endsWith("@uh.edu")) {
-            const newUser = await prisma.user.create({
+            await prisma.user.create({
                 data: {
                     email: email,
                     hashedPassword: hashPass,
