@@ -18,5 +18,26 @@ model User {
   email String @unique
   name String
   hashedPassword String
+  posts Post[]
+  role Role @default(USER)
+
+  @@unique([email, name])
+}
+
+model Post {
+  id Int @id@default(autoincrement())
+  title String
+  description String
+  createdBy User @relation(fields: [authorEmail, authorName], references: [email, name])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime @default(now())
+  imageUrl String?
+  authorEmail String
+  authorName String
+}
+
+enum Role {
+  USER
+  ADMIN
 }
 

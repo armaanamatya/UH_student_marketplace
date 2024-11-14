@@ -26,11 +26,13 @@ export const options: NextAuthOptions = {
                     type: "text"
                 }
             },
+            //@ts-expect-error: nextAuth TS error
             async authorize(credentials) {
                 try{
                     if(!credentials?.email || !credentials?.password) {
                         return null;
                     }
+
 
                     const { email , password } = await signInSchema.parseAsync(credentials)
 
@@ -40,8 +42,13 @@ export const options: NextAuthOptions = {
                             email: email as string,
                         }
                     })
+
+                    if(!user){
+                        return null;
+                    }
                     
                     // Compare the password to the hashed version in the database using bcrypt compare
+                    
                     const compareHash = await compare(password, user.hashedPassword)
     
                     if(!compareHash) {
@@ -63,7 +70,8 @@ export const options: NextAuthOptions = {
         async signIn({ user }) {
             // If the email does not end with @cougarnet.uh.edu, it will not allow
             // the user to sign in. This will be the same for when a user registers.
-            if(user.email?.endsWith("@uh.edu") || (user.email?.endsWith("@cougarnet.uh.edu"))){
+            // THIS IS A TEMPORARY CHANGE
+            if(user.email?.endsWith("@uh.edu") || user.email?.endsWith("@cougarnet.uh.edu")){
                 return true
             } else {
                 return false;
