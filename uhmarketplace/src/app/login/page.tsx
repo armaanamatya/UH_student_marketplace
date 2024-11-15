@@ -5,22 +5,34 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";  // Note: Import 'axios' properly
 
+// exporting the default function loginPage for other parts of the program
 export default function LoginPage() {
+
+    // UseRouter is a hook that programatically lets you navigate through pages --> Router as in routing 
     const router = useRouter();
+
+    // useState is a react Hook that sers up for the LoginPage component
+    // You initialize email and password for user
     const [user, setUser] = React.useState({
         email: "",
         password: "",
     });
+
+    // Using useState to initialize error
     const [error, setError] = React.useState("");
 
+    // async operation when loggin in
     const handleLogin = async () => {
         // Basic validation
         if (!user.email || !user.password) {
+            // If one of the fields are missing then return custom error
             setError("Please fill out both fields.");
             return;
         }
 
+        
         try {
+            //
             const response = await axios.post("/api/auth/login", user);  // Adjust API endpoint if needed
             if (response.status === 200) {
                 router.push("/dashboard");  // Redirect on successful login
@@ -31,8 +43,9 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 bg-cover bg-center"
+        style={{ backgroundImage: "url('/thecollegetouruniversityofhouston_opengraph.jpg')" }}>
+            <div className="flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-shadow duration-300">
                 
                 {/* Left Side - Image */}
                 <div className="w-1/2 hidden md:flex items-center justify-center bg-gray-200">
@@ -42,9 +55,7 @@ export default function LoginPage() {
                         className="object-cover w-full h-full"
                     />
                 </div>
-                
-                {/* Divider Line */}
-                <div className="w-1 border-r border-gray-300"></div>
+    
                 
                 {/* Right Side - Form */}
                 <div className="w-full md:w-1/2 p-8">
@@ -73,10 +84,11 @@ export default function LoginPage() {
 
                     <button
                         onClick={handleLogin}
-                        className="w-full py-2 mb-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                        className="w-full py-2 mb-4 text-white bg-blue-600 rounded-lg flex justify-center items-center hover:bg-red-500 transition duration-300"
                     >
                         Login
                     </button>
+
 
                     <div className="text-center">
                         <Link href="/signup" className="text-blue-600 hover:underline">
