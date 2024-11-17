@@ -28,7 +28,6 @@ export async function POST(req: Request) {
       
         if(email?.endsWith("@uh.edu") || email?.endsWith("@cougarnet.uh.edu")) {
             await prisma.user.create({
-              
                 data: {
                     email: email.toLowerCase(),
                     hashedPassword: hashPass,
