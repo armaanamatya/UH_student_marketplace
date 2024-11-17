@@ -11,7 +11,7 @@ export default function LoginPage() {
     // UseRouter is a hook that programatically lets you navigate through pages --> Router as in routing 
     const router = useRouter();
 
-    // useState is a react Hook that sers up for the LoginPage component
+    // useState is a react Hook that sets up for the LoginPage component
     // You initialize email and password for user
     const [user, setUser] = React.useState({
         email: "",
@@ -21,32 +21,32 @@ export default function LoginPage() {
     // Using useState to initialize error
     const [error, setError] = React.useState("");
 
-    // async operation when loggin in
+    // async operation when logging in
     const handleLogin = async () => {
         // Basic validation
         if (!user.email || !user.password) {
-            // If one of the fields are missing then return custom error
+            // If one of the fields is missing, return a custom error
             setError("Please fill out both fields.");
             return;
         }
 
-        
         try {
-            //
-            const response = await axios.post("/api/auth/login", user);  // Adjust API endpoint if needed
+            const response = await axios.post("/api/auth/signin", user);
+            console.log("API Response:", response); // Log the successful response
             if (response.status === 200) {
-                router.push("/dashboard");  // Redirect on successful login
+                router.push("/dashboard");
             }
         } catch (err) {
+            console.log("API Error:", err); // Log the error for debugging
             setError("Invalid email or password.");
         }
     };
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 bg-cover bg-center"
-        style={{ backgroundImage: "url('/thecollegetouruniversityofhouston_opengraph.jpg')" }}>
+            style={{ backgroundImage: "url('/thecollegetouruniversityofhouston_opengraph.jpg')" }}>
             <div className="flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-shadow duration-300">
-                
+
                 {/* Left Side - Image */}
                 <div className="w-1/2 hidden md:flex items-center justify-center bg-gray-200">
                     <img
@@ -55,13 +55,12 @@ export default function LoginPage() {
                         className="object-cover w-full h-full"
                     />
                 </div>
-    
-                
+
                 {/* Right Side - Form */}
                 <div className="w-full md:w-1/2 p-8">
                     <h1 className="text-3xl font-semibold mb-6">Login</h1>
                     {error && <p className="text-red-500 mb-4">{error}</p>}
-                    
+
                     <label htmlFor="email" className="block mb-2 font-medium">Email</label>
                     <input
                         className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-600"
@@ -89,10 +88,16 @@ export default function LoginPage() {
                         Login
                     </button>
 
-
                     <div className="text-center">
                         <Link href="/signup" className="text-blue-600 hover:underline">
                             Don’t have an account? Sign up here.
+                        </Link>
+                    </div>
+
+                    {/* Forgot Password Link */}
+                    <div className="text-center mt-4">
+                        <Link href="/forgot-password" className="text-blue-600 hover:underline">
+                            Forgot password?
                         </Link>
                     </div>
                 </div>
