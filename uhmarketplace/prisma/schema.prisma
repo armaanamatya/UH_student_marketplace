@@ -1,5 +1,7 @@
 // Anytime you make a change to this prisma file, you must run "npx prisma generate" in your terminal to keep the database up to date
 // You can also run "npx prisma db pull" to ensure the Prisma schema is up to date. 
+// Anytime you make a change to this prisma file, you must run "npx prisma generate" in your terminal to keep the database up to date
+// You can also run "npx prisma db pull" to ensure the Prisma schema is up to date. 
 
 generator client {
   provider = "prisma-client-js"
@@ -46,4 +48,3 @@ enum Role {
   USER
   ADMIN
 }
-
