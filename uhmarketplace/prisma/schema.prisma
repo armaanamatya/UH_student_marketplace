@@ -21,7 +21,17 @@ model User {
   posts Post[]
   role Role @default(USER)
   @@unique([email, name])
+  passwordResets   PasswordReset[] // Define the reverse relation to PasswordReset
 }
+
+model PasswordReset {
+  id        Int      @id @default(autoincrement())
+  token     String  
+  expiresAt DateTime
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
 
 model VerificationToken {
   id      Int      @id @default(autoincrement())
