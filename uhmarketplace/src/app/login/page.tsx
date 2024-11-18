@@ -57,7 +57,7 @@ export default function LoginPage() {
                 </div>
 
                 {/* Right Side - Form */}
-                <div className="w-full md:w-1/2 p-8">
+                <div className="w-full md:w-1/2 p-8" style={{ backgroundColor: 'white' }}>
                     <h1 className="text-3xl font-semibold mb-6">Login</h1>
                     {error && <p className="text-red-500 mb-4">{error}</p>}
 
@@ -83,7 +83,8 @@ export default function LoginPage() {
 
                     <button
                         onClick={handleLogin}
-                        className="w-full py-2 mb-4 text-white bg-blue-600 rounded-lg flex justify-center items-center hover:bg-red-500 transition duration-300"
+                        className="w-full py-2 mb-4 text-white rounded-lg flex justify-center items-center hover:bg-red-500 transition duration-300"
+                        style={{ backgroundColor: 'rgb(37, 99, 235)' }} // Use Tailwind's blue color directly
                     >
                         Login
                     </button>
