@@ -14,6 +14,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        cougRed: "#C8102E",
       },
     },
   },
