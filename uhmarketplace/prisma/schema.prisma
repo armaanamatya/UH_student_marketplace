@@ -1,8 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Anytime you make a change to this prisma file, you must run "npx prisma generate" in your terminal to keep the database up to date
+// You can also run "npx prisma db pull" to ensure the Prisma schema is up to date. 
+// Anytime you make a change to this prisma file, you must run "npx prisma generate" in your terminal to keep the database up to date
+// You can also run "npx prisma db pull" to ensure the Prisma schema is up to date. 
 
 generator client {
   provider = "prisma-client-js"
@@ -14,14 +13,23 @@ datasource db {
 }
 
 model User {
-  id Int @id@default(autoincrement())
-  email String @unique
-  name String
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  name           String
   hashedPassword String
+  emailVerified DateTime?
   posts Post[]
   role Role @default(USER)
-
   @@unique([email, name])
+}
+
+model VerificationToken {
+  id      Int      @id @default(autoincrement())
+  email   String
+  token   String
+  expires DateTime
+
+  @@unique([email, token])
 }
 
 model Post {
@@ -40,4 +48,3 @@ enum Role {
   USER
   ADMIN
 }
-

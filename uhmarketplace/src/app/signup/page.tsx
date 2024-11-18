@@ -47,7 +47,7 @@ export default function SignupPage() {
   const onSignup = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/signup", user);
+      const response = await axios.post("/api/signup", user);
       console.log("Sign up success", response.data);
       router.push("/login");
     } catch (error) {
