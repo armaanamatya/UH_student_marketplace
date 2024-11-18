@@ -19,17 +19,19 @@ const Header = (props: props) => {
           alt="Logo"
           width={70}
           height={70}
-          className="h-10 w-auto md:h-12"
+          className="h-10 w-auto md:h-12 hidden md:block"
         />
-        <div className="flex flex-col items-center absolute left-1/2 transform -translate-x-1/2">
-          <h1 className="text-xl md:text-3xl lg:text-5xl font-bold drop-shadow-xl">
+
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-center text-xl md:text-3xl lg:text-5xl font-bold drop-shadow-xl">
             COOGBAY
           </h1>
-          <h2 className="text-sm md:text-lg lg:text-xl font-bold drop-shadow-xl">
+          <h2 className="text-center text-sm md:text-lg lg:text-xl font-bold drop-shadow-xl">
             FOR COUGARS, BY COUGARS
           </h2>
         </div>
-        <nav className="flex gap-4">
+
+        <nav className="flex gap-2">
           {props.session ? (
             <a
               href="/api/auth/signout"
@@ -39,15 +41,15 @@ const Header = (props: props) => {
             </a>
           ) : (
             <a
-              href="/login"
-              className="border border-transparent px-6 py-3 text-white hover:border-white transition-all duration-200 rounded-full lg:text-2xl text-lg"
+              href="/api/auth/signin"
+              className="border border-transparent px-6 py-3 text-white hover:border-white transition-all duration-200 rounded-full lg:text-2xl text-md md:text-lg"
             >
               Sign In
             </a>
           )}
           <a
             href="/marketplace"
-            className="border border-transparent px-6 py-3 text-white hover:border-white transition-all duration-200 rounded-full lg:text-2xl text-lg"
+            className="border border-transparent px-6 py-3 text-white hover:border-white transition-all duration-200 rounded-full lg:text-2xl text-md md:text-lg"
           >
             Marketplace
           </a>
