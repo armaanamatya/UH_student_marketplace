@@ -82,7 +82,7 @@ export const options: NextAuthOptions = {
 
                 return true;
             //@ts-expect-error: temporary fix
-                const existingUser = await getUserById(user.id as number);
+                
 
                 //if the emailVerified value does not exist, return false
                 if(!existingUser?.emailVerified){
