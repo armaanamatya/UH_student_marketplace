@@ -7,11 +7,9 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      'uhRed': '#C8102E'
-    },
     extend: {
       colors: {
+        'uhRed': '#C8102E',
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
