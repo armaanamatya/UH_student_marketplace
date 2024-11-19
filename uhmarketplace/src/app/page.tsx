@@ -6,6 +6,7 @@ import ImageCarousel from "../components/Slider";
 import FeatureBox from "@/components/ui/FeatureBox";
 import Footer from "@/components/footer";
 import AboutSquare from "@/components/AboutSquare";
+import LandingBanner from "@/components/LandingBanner";
 
 export default async function Home() {
   const session = await getServerSession(options);
@@ -15,24 +16,16 @@ export default async function Home() {
     "/landing-images/UH-Image-2.jpg",
     "/landing-images/UH-Image-3.jpg",
   ];
+
+  const captions = [
+    "Beautiful Landscape 1",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non cum impedit dolorem necessitatibus labore! Dolorum voluptas nemo magni! Laborum, voluptas!",
+    "Majestic Mountain 3",
+  ];
+
   return (
     <div>
-      <div className="bg-cover bg-center py-16 text-white relative h-96 mt-[76px]">
-        <img
-          src="landing-images/UH-DINE-SELL.jpg"
-          alt=""
-          className="absolute top-0 left-0 right-0 bottom-0 opacity-80 -z-1 overflow-hidden object-cover h-full w-full"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black rounded-lg pointer-events-none" />
-        <h2 className="text-3xl sm:text-4xl font-bold absolute top-1/6 right-2 left-2 text-center text-white">
-          BUY, SELL, MEET – ON CAMPUS
-        </h2>
-        <hr className="absolute top-32 right-20 left-20 text-center" />
-        <p className="text-white text-md mt-2 sm:text-lg absolute top-40 right-2 left-2 text-center font-semibold">
-          Here at CoogBay, you can sell, purchase and exchange products,
-          services, and meet up with fellow students.
-        </p>
-      </div>
+      <LandingBanner></LandingBanner>
 
       <div className="flex-col sm:flex-row flex justify-around py-16 bg-white text-gray-700 z-1 px-8 gap-4">
         <FeatureBox
@@ -58,7 +51,7 @@ export default async function Home() {
       </div>
 
       <main className="min-h-full flex items-center justify-center bg-gray-100 py-10">
-        <ImageCarousel images={images} />
+        <ImageCarousel images={images} captions = {captions} />
       </main>
 
       <div className="flex gap-6 my-8 flex-col justify-center items-center">
