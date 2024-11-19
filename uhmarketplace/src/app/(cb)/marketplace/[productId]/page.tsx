@@ -1,5 +1,5 @@
 import { prisma } from "../../../../../prisma/prisma";
-import ProductCard from "@/components/product/ProductCard";
+// import ProductCard from "@/components/product/ProductCard";
 
 export default async function Product({
     params,
@@ -18,7 +18,7 @@ export default async function Product({
         if(post) {
             return (
                 <div>
-                    <ProductCard post={post}></ProductCard>
+                    {/* <ProductCard post={post}></ProductCard> */}
                 </div>
             )
         } else {

@@ -51,7 +51,7 @@ export default async function Dashboard() {
                 <h1 className="text-4xl">Your listings</h1>
                 {posts.length > 0 ? (
                     posts.map((post) => (
-                        <ItemCard item={post} ></ItemCard>
+                        <ItemCard key={post.id} item={post} ></ItemCard>
                     ))
                 ): 
                     <h1 className="text-white">No active listings found.</h1>
