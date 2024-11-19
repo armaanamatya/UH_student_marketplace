@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";  // Note: Import 'axios' properly
+import { signIn } from "next-auth/react";
 
 // exporting the default function loginPage for other parts of the program
 export default function LoginPage() {
@@ -31,10 +31,17 @@ export default function LoginPage() {
         }
 
         try {
-            const response = await axios.post("/api/auth/signin", user);
+            // Instead of axios here, it is sending the request over to the nextauth authentication
+            const response = await signIn('credentials', {
+                email: user.email,
+                password: user.password,
+                redirect: true,
+                callbackUrl: '/'
+            } )
             console.log("API Response:", response); // Log the successful response
-            if (response.status === 200) {
-                router.push("/dashboard");
+            if (response?.status === 200) {
+                // I put this to route back to the homepage but its up to yall
+                router.push("/");
             }
         } catch (err) {
             console.log("API Error:", err); // Log the error for debugging
