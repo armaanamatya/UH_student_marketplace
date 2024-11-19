@@ -33,10 +33,7 @@ const ItemCarousel: React.FC<ItemCarouselProps> = ({ items }) => {
               }`}
             >
               <ItemCard
-                imageUrl={item.imageUrl as string}
-                title={item.title}
-                description={item.description}
-                price={item.price.toString()}
+                item={item}
                 // onAddToCart={item.onAddToCart}
               />
             </div>
