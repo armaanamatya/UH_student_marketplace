@@ -17,7 +17,7 @@ export default async function Home() {
   ];
   return (
     <div>
-      <div className="bg-cover bg-center py-16 text-white relative h-96 mt-[76px]">
+      <div className="bg-cover bg-center py-16 text-white relative h-96">
         <img
           src="landing-images/UH-DINE-SELL.jpg"
           alt=""

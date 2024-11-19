@@ -71,18 +71,10 @@ export const options: NextAuthOptions = {
         async signIn({ user }) {
             // If the email does not end with @uh.edu, it will not allow
             // the user to sign in. This will be the same for when a user registers.
-            if(user.email?.endsWith("@uh.edu")){
+            // We are gonna leave it as both for now for the sake of simplicity
+            if(user.email?.endsWith("@uh.edu") || user.email?.endsWith("@cougarnet.uh.edu")){
             //@ts-expect-error: temporary fix
                 const existingUser = await getUserById(user.id as number);
-
-                //if the emailVerified value does not exist, return false
-                if(!existingUser?.emailVerified){
-                    return false;
-                }
-
-                return true;
-            //@ts-expect-error: temporary fix
-                
 
                 //if the emailVerified value does not exist, return false
                 if(!existingUser?.emailVerified){
@@ -95,7 +87,10 @@ export const options: NextAuthOptions = {
             }
 
 
-        }
+        },
+        async redirect({ url, baseUrl }) {
+            return baseUrl
+          }
     },
     // Here is where we would customize the signIn/signOut page so we are not forced to use
     // NextAuths pages

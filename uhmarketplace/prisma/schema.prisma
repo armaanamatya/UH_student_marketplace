@@ -18,6 +18,7 @@ model User {
   name           String
   hashedPassword String
   emailVerified DateTime?
+  profilePicUrl String @default("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541")
   posts Post[]
   role Role @default(USER)
   @@unique([email, name])
@@ -44,6 +45,7 @@ model VerificationToken {
 
 model Post {
   id Int @id@default(autoincrement())
+  price Decimal @db.Decimal(9,2)
   title String
   description String
   createdBy User @relation(fields: [authorEmail, authorName], references: [email, name])

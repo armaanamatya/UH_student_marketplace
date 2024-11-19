@@ -27,7 +27,7 @@ const DiscoverList: React.FC<DiscoverListProps> = ({items}) => {
               description={item.description}
               imageUrl={item.imageUrl}
               price={item.price}
-              onAddToCart={() => console.log(`${item.title} added to cart`)}
+              // onAddToCart={() => console.log(`${item.title} added to cart`)}
             />
           ))}
         </div>
