@@ -26,6 +26,7 @@ export async function POST(req: Request) {
         const hashPass = await hash(password, 10);
 
       
+        // Allow for both for the time being please - Alex
         if(email?.endsWith("@uh.edu") || email?.endsWith("@cougarnet.uh.edu")) {
             await prisma.user.create({
                 data: {

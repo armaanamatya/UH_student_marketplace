@@ -15,6 +15,7 @@ async function main() {
             hashedPassword: hashPass,
             posts: {
                 create: [{
+                    price: "19.99",
                     title: "Big Cougars",
                     description: "I am selling big cougars. Please buy",
                     imageUrl: "https://plus.unsplash.com/premium_photo-1664304244899-60b0a629ade1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -32,6 +33,7 @@ async function main() {
             hashedPassword: hashPass,
             posts: {
                 create: [{
+                    price: "10",
                     title: "Big Cougars 2",
                     description: "I am selling big cougars. Do not buy from Alex. Please buy",
                     imageUrl: "https://plus.unsplash.com/premium_photo-1664304244899-60b0a629ade1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

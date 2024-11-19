@@ -1,10 +1,10 @@
-"use client";
 /*
-import { prisma } from "../../../../prisma/prisma";
+// 
 import { Card, Image, CardBody, CardFooter, Spacer } from '@nextui-org/react'
 import Link from "next/link";
 */
 
+import { prisma } from "../../../../prisma/prisma";
 import Sidebar from "@/components/sideBar";
 import ItemCarousel from "@/components/itemCarousel";
 import DiscoverList from "@/components/discoverItems";
@@ -12,7 +12,7 @@ import SellerCarousel from "@/components/sellerCarousel";
 
 // https://next-auth.js.org/getting-started/client
 // Test the middleware by navigating to the /dashboard route
-export default function Marketplace() {
+export default async function Marketplace() {
   /*
     const posts = await prisma.post.findMany();
     return (
@@ -42,36 +42,7 @@ export default function Marketplace() {
     );
     */
 
-  const items = [
-    {
-      id: 1,
-      title: "Sample Item 1",
-      description: "This is a description of the sample item 1.",
-      imageUrl: "https://via.placeholder.com/300",
-      price: "$29.99",
-    },
-    {
-      id: 2,
-      title: "Sample Item 2",
-      description: "This is a description of the sample item 2.",
-      imageUrl: "https://via.placeholder.com/300",
-      price: "$39.99",
-    },
-    {
-      id: 3,
-      title: "Sample Item 3",
-      description: "This is a description of the sample item 3.",
-      imageUrl: "https://via.placeholder.com/300",
-      price: "$49.99",
-    },
-    {
-      id: 4,
-      title: "Sample Item 4",
-      description: "This is a description of the sample item 4.",
-      imageUrl: "https://via.placeholder.com/300",
-      price: "$19.99",
-    },
-  ];
+  const items = await prisma.post.findMany();
 
   const listSellers = [
     {
@@ -125,23 +96,23 @@ export default function Marketplace() {
         </h1>
 
         <ItemCarousel
-          items={items.map((item) => ({ ...item, onAddToCart: () => {} }))}
+          items={items.map((item) => ({ ...item}))}
         />
         <h1 className="text-cougRed text-2xl underline decoration-4 underline-offset-8 p-4">
           Popular Items
         </h1>
         <ItemCarousel
-          items={items.map((item) => ({ ...item, onAddToCart: () => {} }))}
+          items={items.map((item) => ({ ...item}))}
         />
-        <h1 className="text-cougRed text-2xl underline decoration-4 underline-offset-8 p-4">
+        {/* <h1 className="text-cougRed text-2xl underline decoration-4 underline-offset-8 p-4">
           Top Sellers
-        </h1>
-        <SellerCarousel
+        </h1> */}
+        {/* <SellerCarousel
           sellers={listSellers.map((seller) => ({
             ...seller,
             onViewProfile: () => {},
           }))}
-        />
+        /> */}
 
         <DiscoverList items={items} />
       </div>

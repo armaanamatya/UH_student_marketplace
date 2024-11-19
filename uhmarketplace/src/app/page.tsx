@@ -26,7 +26,6 @@ export default async function Home() {
   return (
     <div>
       <LandingBanner></LandingBanner>
-
       <div className="flex-col sm:flex-row flex justify-around py-16 bg-white text-gray-700 z-1 px-8 gap-4">
         <FeatureBox
           imageSrc="landing-images/box-icon.png"

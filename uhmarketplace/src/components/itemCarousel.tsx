@@ -1,17 +1,11 @@
 // components/ItemCarousel.tsx
-
+'use client'
 import React, { useState } from 'react';
 import ItemCard from './itemCard';
+import { Post } from '@prisma/client';
 
 interface ItemCarouselProps {
-  items: {
-    id: number;
-    imageUrl: string;
-    title: string;
-    description: string;
-    price: string;
-    onAddToCart: () => void,
-  }[];
+  items: Post[]
 }
 
 const ItemCarousel: React.FC<ItemCarouselProps> = ({ items }) => {
@@ -39,11 +33,11 @@ const ItemCarousel: React.FC<ItemCarouselProps> = ({ items }) => {
               }`}
             >
               <ItemCard
-                imageUrl={item.imageUrl}
+                imageUrl={item.imageUrl as string}
                 title={item.title}
                 description={item.description}
-                price={item.price}
-                onAddToCart={item.onAddToCart}
+                price={item.price.toString()}
+                // onAddToCart={item.onAddToCart}
               />
             </div>
           ))}

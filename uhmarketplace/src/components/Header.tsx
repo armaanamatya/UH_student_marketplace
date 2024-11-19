@@ -2,16 +2,33 @@ import React from "react";
 import Image from "next/image";
 import uhLogo from "./images/uh_white_logo.png";
 import { Session } from "next-auth";
+import Link from "next/link";
+import { Avatar } from "@nextui-org/react";
+import { prisma } from "../../prisma/prisma";
 
 type props = {
   session: Session | null;
 };
 
-const Header = (props: props) => {
+const Header = async (props: props) => {
+  let profileImage;
+  if(props.session) {
+    profileImage = await prisma.user.findUnique({
+        where: {
+            email: props.session?.user?.email as string
+        },
+        // Only pulls the profilePicUrl from the user
+        select: {
+            profilePicUrl: true
+        }
+      })
+  }
+
+
   return (
     <header
       style={{ backgroundColor: "#C8102E" }}
-      className="text-white fixed top-0 w-full z-50"
+      className="text-white sticky top-0 w-full z-50"
     >
       <div className="container mx-auto py-4 flex justify-between items-center px-8">
         <Image
@@ -41,10 +58,10 @@ const Header = (props: props) => {
             </a>
           ) : (
             <a
-              href="/api/auth/signin"
+              href="/signup"
               className="border border-transparent px-6 py-3 text-white hover:border-white transition-all duration-200 rounded-full lg:text-2xl text-md md:text-lg"
             >
-              Sign In
+              Sign Up
             </a>
           )}
           <a
@@ -53,6 +70,18 @@ const Header = (props: props) => {
           >
             Marketplace
           </a>
+          {props.session ? (
+            <Link 
+            href={'/dashboard'}
+            className="self-center"
+            >
+                <Avatar
+                src={profileImage?.profilePicUrl}
+                ></Avatar>
+            </Link>
+          ): (
+            null
+          )}
         </nav>
       </div>
     </header>

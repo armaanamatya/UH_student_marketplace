@@ -6,7 +6,7 @@ interface ItemListProps {
   description: string;
   imageUrl: string;
   price: string;
-  onAddToCart: () => void;
+  // onAddToCart: () => void;
 }
 
 const ItemList: React.FC<ItemListProps> = ({ title, description, imageUrl, price, onAddToCart }) => {

@@ -50,10 +50,10 @@ const VerifyEmailForm = () => {
     return(
         // This is not final and requires frontend to make it look pretty (:
         // Also reroute logic would need to be added so it sends the user back to the login page to finish 
-        <div>
+        <div className="text-black static min-h-screen flex">
             {!success && !error && <p>Loading</p>}
-            {!success && error}
-            {success}
+            {!success && error && <h2 className="text-5xl justify-self-center w-full p-5">{error}</h2>}
+            {success && <h2 className="text-5xl">{success}! You can now sign in!</h2>}
         </div>
     )
 }
