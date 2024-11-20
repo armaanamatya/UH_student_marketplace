@@ -2,9 +2,12 @@ import { useSession } from "next-auth/react";
 import { prisma } from "../../../../prisma/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
-import { Avatar } from "@nextui-org/react";
+import { Avatar, user } from "@nextui-org/react";
 import Link from "next/link";
 import ItemCard from "@/components/itemCard";
+import axios from "axios";
+import toast from "react-hot-toast";
+import UserPosts from "@/components/userActions/UserPosts";
 
 // https://next-auth.js.org/getting-started/client
 // Test the middleware by navigating to the /dashboard route
@@ -30,6 +33,31 @@ export default async function Dashboard() {
     return <a href="/api/auth/signin">Sign in</a>;
   }
 
+    const deletePost = async (id: number) => {
+        try {
+            const res = await axios.put('/api/listings', {id});
+
+            if(res.status === 200) {
+                console.log('Post deleted');
+                toast.success('Post deleted successfully');
+            }
+        } catch (error) {
+            console.log('Error deleting post:', error);
+            toast.error('An error occurred while deleting the post');
+        }
+    }
+
+    const userInfo = await prisma.user.findUnique({
+        where: {
+            email: session?.user?.email as string
+        }, 
+        select: {   
+            name: true,
+            email: true,
+            profilePicUrl: true
+        }
+    })
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow">
@@ -51,10 +79,15 @@ export default async function Dashboard() {
                     />
                     <div>
                       <h2 className="text-xl font-semibold">
-                        Welcome, {session?.user?.name}
+                        Welcome, {userInfo?.name}
                       </h2>
                       <p className="text-gray-600">{session?.user?.email}</p>
                     </div>
+                    <Link href={'/dashboard/userProfile'}>
+                      <button className="mt-4 px-4 py-2 bg-green-500 text-white rounded">
+                        Edit Profile
+                      </button>
+                    </Link>
                   </div>
                   <Link href={'/create_post'}>
                     <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
@@ -63,8 +96,17 @@ export default async function Dashboard() {
                   </Link>
                   <div className="mt-6">
                     <h3 className="text-lg font-medium">Your Listings</h3>
-                    <ul className="mt-2">
-                      {userPosts.map((post) => (
+                    {/* <ul className="mt-2"> */}
+                    <div className="overflow-y-auto max-h-96">
+                    {userPosts.length > 0 ? (
+                            <UserPosts userPosts={userPosts} />
+                        ) : (
+                            <p className="text-center text-gray-600 mt-4">
+                            No listings, create one now!
+                            </p>
+                        )}
+                    </div>
+                      {/* {userPosts.map((post) => (
                         <li
                           key={post.id}
                           className="bg-white shadow overflow-hidden rounded-lg mt-2"
@@ -76,14 +118,14 @@ export default async function Dashboard() {
                               <button className="px-4 py-2 bg-yellow-500 text-white rounded mr-2">
                                 Edit
                               </button>
-                              <button className="px-4 py-2 bg-red-500 text-white rounded">
+                              <button className="px-4 py-2 bg-red-500 text-white rounded" onClick={() => deletePost(post.id)}>
                                 Delete
                               </button>
                             </div>
                           </div>
                         </li>
-                      ))}
-                    </ul>
+                      ))} */}
+                    {/* </ul> */}
                   </div>
                 </div>
               ) : (

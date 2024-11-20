@@ -1,4 +1,5 @@
 import { prisma } from "../../../../../prisma/prisma";
+import Link from "next/link";
 // import ProductCard from "@/components/product/ProductCard";
 
 export default async function Product({
@@ -30,6 +31,11 @@ export default async function Product({
                             <p className="text-gray-700 mb-6 pt-5">Created by: {post.authorName}</p>
                             <p className="text-gray-700 mb-6">Authors Email: {post.authorEmail}</p>
                             <p className="text-gray-700 mb-6">{post.createdAt.toLocaleDateString()}</p>
+                            <Link href="/marketplace">
+                                <button className="mt-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
+                                    Back to Marketplace
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

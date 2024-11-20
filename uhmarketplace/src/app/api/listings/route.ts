@@ -6,10 +6,11 @@ import { prisma } from '../../../../prisma/prisma'; // Adjust the import based o
 import { options } from '../auth/[...nextauth]/options'; // Adjust the import based on your project structure
 import { NextResponse, NextRequest } from 'next/server';
 
-export async function PUT(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
   const session = await getServerSession(options);
 
-  const {title, description, price, imageUrl, id} = await req.json();
+  const {id} = await req.json();
+  console.log(id);
 
   try {
     const updatedListing = await prisma.post.delete({
