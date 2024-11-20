@@ -49,17 +49,17 @@ export default async function Home() {
         />
       </div>
 
-      <main className="min-h-full flex items-center justify-center bg-gray-100 py-10">
+      <main className="min-h-full flex items-center justify-center bg-gray-100 pb-10">
         <ImageCarousel images={images} captions = {captions} />
       </main>
 
       <div className="flex gap-6 my-8 flex-col justify-center items-center">
-      <AboutSquare
-      title="WE ARE ABOUT COMMUNITY"
-      imageSrc="landing-images/UH-Photo-4.jpg"
-      imageAlt="UH Community Photo"
-      content="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum unde cum enim nostrum nam facilis tempore! Maiores, magni nihil! Accusantium molestias fugiat dicta vitae aut at laboriosam sequi fuga necessitatibus."
-       />
+        <AboutSquare
+        title="WE ARE ABOUT COMMUNITY"
+        imageSrc="landing-images/UH-Photo-4.jpg"
+        imageAlt="UH Community Photo"
+        content="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum unde cum enim nostrum nam facilis tempore! Maiores, magni nihil! Accusantium molestias fugiat dicta vitae aut at laboriosam sequi fuga necessitatibus."
+        />
       </div>
       <hr className="mx-10"/>
 
