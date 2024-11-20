@@ -31,6 +31,10 @@ const CreateListing = () => {
         const newListing = res.data;
         console.log('Listing created:', newListing);
         toast.success('Listing created successfully!');
+        setTitle('');
+        setDescription('');
+        setPrice('');
+        setImageUrl('');
         // Optionally, you can reset the form or redirect the user
       } else {
         toast.error(res.data.message);
