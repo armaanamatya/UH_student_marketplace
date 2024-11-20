@@ -10,7 +10,7 @@ const CreateListing = () => {
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!title || !description || !price) {
