@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
+import toast, { Toaster } from "react-hot-toast";
 
 const CreateListing = () => {
   const { data: session } = useSession();
@@ -29,19 +30,20 @@ const CreateListing = () => {
       if (res.status === 201) {
         const newListing = res.data;
         console.log('Listing created:', newListing);
+        toast.success('Listing created successfully!');
         // Optionally, you can reset the form or redirect the user
       } else {
-        alert(res.data.message);
+        toast.error(res.data.message);
       }
     } catch (error) {
       console.error('Error creating listing:', error);
-      console.log(title)
-      alert('An error occurred while creating the listing');
+      toast.error('An error occurred while creating the listing');
     }
   };
 
   return (
     <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md border-black">
+     <Toaster/>
       <h2 className="text-2xl font-bold mb-6">Create New Listing</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
