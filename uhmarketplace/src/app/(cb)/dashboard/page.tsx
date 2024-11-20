@@ -33,20 +33,6 @@ export default async function Dashboard() {
     return <a href="/api/auth/signin">Sign in</a>;
   }
 
-    const deletePost = async (id: number) => {
-        try {
-            const res = await axios.put('/api/listings', {id});
-
-            if(res.status === 200) {
-                console.log('Post deleted');
-                toast.success('Post deleted successfully');
-            }
-        } catch (error) {
-            console.log('Error deleting post:', error);
-            toast.error('An error occurred while deleting the post');
-        }
-    }
-
     const userInfo = await prisma.user.findUnique({
         where: {
             email: session?.user?.email as string
@@ -54,7 +40,8 @@ export default async function Dashboard() {
         select: {   
             name: true,
             email: true,
-            profilePicUrl: true
+            profilePicUrl: true,
+            role: true,
         }
     })
 
@@ -88,14 +75,22 @@ export default async function Dashboard() {
                         Edit Profile
                       </button>
                     </Link>
-                  </div>
-                  <Link href={'/create_post'}>
+                    {userInfo?.role === 'ADMIN' && (
+                        <Link href={'/adminDashboard'}>
+                            <button className="mt-4 px-4 py-2 bg-green-500 text-white rounded">
+                            Admin Dashboard
+                            </button>
+                        </Link>
+                    )}
+
+                    <Link href={'/create_post'}>
                     <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
                         Create New Listing
                     </button>
                   </Link>
+                  </div>
                   <div className="mt-6">
-                    <h3 className="text-lg font-medium">Your Listings</h3>
+                    <h3 className="text-2xl font-medium font-extrabold">Your Listings</h3>
                     {/* <ul className="mt-2"> */}
                     <div className="overflow-y-auto max-h-96">
                     {userPosts.length > 0 ? (

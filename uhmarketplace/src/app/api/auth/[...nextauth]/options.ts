@@ -95,6 +95,7 @@ export const options: NextAuthOptions = {
     // Here is where we would customize the signIn/signOut page so we are not forced to use
     // NextAuths pages
     pages: {
+        signIn: '/login',
         // https://next-auth.js.org/configuration/pages
     }
 }
