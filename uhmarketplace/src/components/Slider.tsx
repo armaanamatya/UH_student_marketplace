@@ -44,24 +44,26 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, captions }) => {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto overflow-hidden">
+    <div className="relative w-full max-w-5xl mx-auto overflow-hidden">
       {/* Carousel Container */}
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((image, index) => (
-          <div key={index} className="flex-shrink-0 w-full h-80 relative"> {/* Increased height */}
+          <div key={index} className="flex-shrink-0 w-full h-96 relative">
             {/* Image */}
             <img
               src={image}
               alt={`Slide ${index + 1}`}
-              className="w-full h-full object-cover rounded-lg shadow-lg" // Adjusted height
+              className="w-full h-full object-cover rounded-lg shadow-lg"
             />
-            {/* Caption */}
+            {/* Centered Caption */}
             {index === currentIndex && (
-              <div className="absolute bottom-4 left-4 bg-white/80 px-4 py-2 rounded-md shadow-md">
-                <p className="text-black text-sm font-medium">{captions[index]}</p>
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                <p className="text-white text-2xl sm:text-3xl md:text-4xl font-bold text-center px-4">
+                  {captions[index]}
+                </p>
               </div>
             )}
           </div>

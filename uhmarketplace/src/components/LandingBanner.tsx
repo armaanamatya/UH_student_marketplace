@@ -2,7 +2,7 @@ import React from "react";
 
 const LandingBanner = () => {
   return (
-    <div className="bg-cover bg-center py-16 text-white relative h-96 mt-[76px]">
+    <div className="bg-cover bg-center py-16 text-white relative h-96">
       {/* Background Image */}
       <img
         src="landing-images/UH-DINE-SELL.jpg"
