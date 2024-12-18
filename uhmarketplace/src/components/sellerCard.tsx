@@ -8,7 +8,6 @@ interface SellerSummaryCardProps {
   rating: number;
   totalProducts: number;
   bio: string;
-  onViewProfile: () => void;
 }
 
 const SellerSummaryCard: React.FC<SellerSummaryCardProps> = ({
@@ -17,7 +16,6 @@ const SellerSummaryCard: React.FC<SellerSummaryCardProps> = ({
   rating,
   totalProducts,
   bio,
-  onViewProfile,
 }) => {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs w-full border border-gray-200">
@@ -64,7 +62,6 @@ const SellerSummaryCard: React.FC<SellerSummaryCardProps> = ({
           <span>{totalProducts} Products</span>
         </div>
         <button
-          onClick={onViewProfile}
           className="text-sm text-white hover:text-gray-200 focus:outline-none"
         >
           View Profile

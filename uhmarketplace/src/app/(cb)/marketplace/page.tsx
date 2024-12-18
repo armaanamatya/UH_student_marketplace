@@ -107,13 +107,11 @@ export default async function Marketplace() {
         {/* <h1 className="text-cougRed text-2xl underline decoration-4 underline-offset-8 p-4">
           Top Sellers
         </h1> */}
-        {/* <SellerCarousel
+        <SellerCarousel
           sellers={listSellers.map((seller) => ({
             ...seller,
-            onViewProfile: () => {},
           }))}
-        /> */}
-
+        />
         <DiscoverList items={items} />
       </div>
     </div>

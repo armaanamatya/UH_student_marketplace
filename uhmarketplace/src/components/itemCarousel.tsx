@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import ItemCard from './itemCard';
 import { Post } from '@prisma/client';
+import Link from 'next/link';
 
 interface ItemCarouselProps {
   items: Post[]
@@ -32,13 +33,13 @@ const ItemCarousel: React.FC<ItemCarouselProps> = ({ items }) => {
                 index === currentIndex ? 'scale-100' : 'scale-90 opacity-70'
               }`}
             >
-              <ItemCard
-                imageUrl={item.imageUrl as string}
-                title={item.title}
-                description={item.description}
-                price={item.price.toString()}
-                // onAddToCart={item.onAddToCart}
-              />
+              <Link href={`/marketplace/${item.id}`}>
+                <ItemCard
+                  item={item}
+                  // onAddToCart={item.onAddToCart}
+                />
+              </Link>
+
             </div>
           ))}
         </div>

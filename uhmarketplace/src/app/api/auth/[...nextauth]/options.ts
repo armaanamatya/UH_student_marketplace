@@ -72,7 +72,7 @@ export const options: NextAuthOptions = {
             // If the email does not end with @uh.edu, it will not allow
             // the user to sign in. This will be the same for when a user registers.
             // We are gonna leave it as both for now for the sake of simplicity
-            if(user.email?.endsWith("@uh.edu") || user.email?.endsWith("@cougarnet.uh.edu")){
+            if(user.email?.endsWith("@uh.edu") || user.email?.endsWith("@gmail.com")) {
             //@ts-expect-error: temporary fix
                 const existingUser = await getUserById(user.id as number);
 
@@ -95,6 +95,7 @@ export const options: NextAuthOptions = {
     // Here is where we would customize the signIn/signOut page so we are not forced to use
     // NextAuths pages
     pages: {
+        signIn: '/login',
         // https://next-auth.js.org/configuration/pages
     }
 }

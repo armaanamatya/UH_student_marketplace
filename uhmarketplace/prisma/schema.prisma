@@ -51,7 +51,7 @@ model Post {
   createdBy User @relation(fields: [authorEmail, authorName], references: [email, name])
   createdAt DateTime  @default(now())
   updatedAt DateTime @default(now())
-  imageUrl String?
+  imageUrl String @default("https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=")
   authorEmail String
   authorName String
 }

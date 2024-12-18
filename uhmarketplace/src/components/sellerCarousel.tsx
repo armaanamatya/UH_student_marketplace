@@ -10,7 +10,6 @@ interface CarouselItem {
   rating: number;
   totalProducts: number;
   bio: string;
-  onViewProfile: () => void;
 }
 
 interface SellerCarouselProps {
@@ -48,7 +47,6 @@ const SellerCarousel: React.FC<SellerCarouselProps> = ({ sellers }) => {
                 rating={seller.rating}
                 totalProducts={seller.totalProducts}
                 bio={seller.bio}
-                onViewProfile={seller.onViewProfile}
               />
             </div>
           ))}

@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
       
         // Allow for both for the time being please - Alex
-        if(email?.endsWith("@uh.edu") || email?.endsWith("@cougarnet.uh.edu")) {
+        if(email?.endsWith("@uh.edu") || email?.endsWith("@gmail.com")) {
             await prisma.user.create({
                 data: {
                     email: email.toLowerCase(),

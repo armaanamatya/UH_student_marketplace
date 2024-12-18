@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import ItemList from './itemList';
-
-interface Item {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  price: string;
-}
+import { Post } from '@prisma/client';
 
 interface DiscoverListProps {
-  items: Item[];
+  items: Post[];
 }
 
 const DiscoverList: React.FC<DiscoverListProps> = ({items}) => {
@@ -25,8 +18,8 @@ const DiscoverList: React.FC<DiscoverListProps> = ({items}) => {
               key={item.id}
               title={item.title}
               description={item.description}
-              imageUrl={item.imageUrl}
-              price={item.price}
+              imageUrl={item.imageUrl as string}
+              price={item.price.toString()}
               // onAddToCart={() => console.log(`${item.title} added to cart`)}
             />
           ))}

@@ -31,13 +31,16 @@ const Header = async (props: props) => {
       className="text-white sticky top-0 w-full z-50"
     >
       <div className="container mx-auto py-4 flex justify-between items-center px-8">
-        <Image
-          src={uhLogo}
-          alt="Logo"
-          width={70}
-          height={70}
-          className="h-10 w-auto md:h-12 hidden md:block"
-        />
+        <Link href={'/'}>
+            <Image
+            src={uhLogo}
+            alt="Logo"
+            width={70}
+            height={70}
+            className="h-10 w-auto md:h-12 hidden md:block"
+            />
+        </Link>
+
 
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-center text-xl md:text-3xl lg:text-5xl font-bold drop-shadow-xl">

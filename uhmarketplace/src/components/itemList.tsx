@@ -9,7 +9,7 @@ interface ItemListProps {
   // onAddToCart: () => void;
 }
 
-const ItemList: React.FC<ItemListProps> = ({ title, description, imageUrl, price, onAddToCart }) => {
+const ItemList: React.FC<ItemListProps> = ({ title, description, imageUrl, price }) => {
   return (
     <div className="w-4/5 max-h-96 bg-cougRed rounded-lg shadow-lg overflow-hidden">
       <img className="w-full max-w-80 h-56 object-cover" src={imageUrl} alt={title} />
@@ -21,7 +21,7 @@ const ItemList: React.FC<ItemListProps> = ({ title, description, imageUrl, price
         <div className="flex items-center justify-between mt-4">
           <span className="text-xl font-bold text-white">{price}</span>
           <button
-            onClick={onAddToCart}
+            // onClick={onAddToCart}
             className="px-4 py-2 bg-white text-cougRed rounded-lg hover:bg-gray-100 focus:outline-none "
           >
             Add to Cart

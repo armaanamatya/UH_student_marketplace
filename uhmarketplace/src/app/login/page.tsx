@@ -41,7 +41,7 @@ export default function LoginPage() {
             console.log("API Response:", response); // Log the successful response
             if (response?.status === 200) {
                 // I put this to route back to the homepage but its up to yall
-                router.push("/");
+                router.push("/marketplace");
             }
         } catch (err) {
             console.log("API Error:", err); // Log the error for debugging
